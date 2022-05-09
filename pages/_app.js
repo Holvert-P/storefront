@@ -4,6 +4,8 @@ import { DisplayProvider } from "../context/display-context";
 import "../styles/globals.css";
 import Layout from "../components/layout/layout";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
 function MyApp({ Component, pageProps }) {
   return (
     <StoreProvider>

@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
-import Image from "next/image"
-import { BiShoppingBag } from "react-icons/bi";
+import Image from "next/image";
 import StoreContext from "../../context/store-context";
-import { formatPrice, resetOptions } from "../../utils/helper-functions";
+import { resetOptions } from "../../utils/helper-functions";
 import styles from "../../styles/product.module.css";
 import { createClient } from "../../utils/client";
 import { formatPrices } from "../../utils/prices";
+import ButtonAdd from "../../components/button";
 
 const Product = ({ product }) => {
   const { addVariantToCart, cart } = useContext(StoreContext);
@@ -14,12 +14,6 @@ const Product = ({ product }) => {
     quantity: 0,
     size: "",
   });
-
-  useEffect(() => {
-    if (product) {
-      setOptions(resetOptions(product));
-    }
-  }, [product]);
 
   const handleQtyChange = (action) => {
     if (action === "inc") {
@@ -44,14 +38,7 @@ const Product = ({ product }) => {
     }
   };
 
-  const handleAddToBag = () => {
-    addVariantToCart({
-      variantId: options.variantId,
-      quantity: options.quantity,
-    });
-    if (product) setOptions(resetOptions(product));
-  };
-
+  console.log("entro");
   return (
     <div className={styles.container}>
       <figure className={styles.image}>
@@ -117,10 +104,12 @@ const Product = ({ product }) => {
               </button>
             </div>
           </div>
-          <button className={styles.addbtn} onClick={() => handleAddToBag()}>
-            <span>Add to bag</span>
-            <BiShoppingBag />
-          </button>
+          <ButtonAdd
+            options={options}
+            setOptions={setOptions}
+            addVariantToCart={addVariantToCart}
+            product={product}
+          />
           <div className={styles.tabs}>
             <div className="tab-titles">
               <button className={styles.tabtitle}>Product Description</button>

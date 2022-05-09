@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useContext } from "react";
 import DisplayContext from "../../context/display-context";
 import StoreContext from "../../context/store-context";
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
 import styles from "../../styles/cart-view.module.css";
-import { quantity, sum, formatPrice } from "../../utils/helper-functions";
+import { formatPrice, quantity, sum } from "../../utils/helper-functions";
 import { formatPrices } from "../../utils/prices";
 
 const CartView = () => {
@@ -18,19 +18,13 @@ const CartView = () => {
   return (
     <div className={`${styles.container} ${cartView ? styles.active : null}`}>
       <div className={styles.top}>
-        <p>Bag</p>
+        <p>Carrito</p>
         <p>
-          {cart.items.length > 0 ? cart.items.map(quantity).reduce(sum) : 0}{" "}
+          {cart.items.length > 0 ? cart.items.map(quantity).reduce(sum) : 0}
           {cart.items.length > 0 && cart.items.map(quantity).reduce(sum) === 1
-            ? "item"
-            : "items"}
+            ? "articulo"
+            : "articulos"}
         </p>
-        <button
-          className={styles.closebtn}
-          onClick={() => updateCartViewDisplay()}
-        >
-          X
-        </button>
       </div>
       <div className={styles.overview}>
         {cart.items
@@ -55,13 +49,13 @@ const CartView = () => {
                   >
                     <a>
                       <div className={styles.placeholder}>
-                      <Image
-                        objectFit="cover"
-                        height="100%"
-                        width="100%"
-                        src={i.variant.product.thumbnail}
-                        alt={`${i.title}`}
-                      />
+                        <Image
+                          objectFit="cover"
+                          height="100%"
+                          width="100%"
+                          src={i.variant.product.thumbnail}
+                          alt={`${i.title}`}
+                        />
                       </div>
                     </a>
                   </Link>
@@ -78,10 +72,9 @@ const CartView = () => {
                       >
                         <a>{i.title}</a>
                       </Link>
-                      <p className={styles.size}>Size: {i.variant.title}</p>
+                      <p className={styles.size}>Tamaño: {i.variant.title}</p>
                       <p className={styles.size}>
-                        Price:{" "}
-                        {formatPrices(cart, i.variant)}
+                        Precio: {formatPrices(cart, i.variant)}
                       </p>
                     </div>
                     <div>
@@ -119,7 +112,7 @@ const CartView = () => {
                     className={styles.remove}
                     onClick={() => removeLineItem(i.id)}
                   >
-                    Remove
+                    Eliminar
                   </button>
                 </div>
               </div>
@@ -127,7 +120,7 @@ const CartView = () => {
           })}
       </div>
       <div className={styles.subtotal}>
-        <p>Subtotal (incl. taxes)</p>
+        <p>Subtotal</p>
         <span>
           {cart.region ? formatPrice(cart.subtotal, currencyCode) : 0}
         </span>
@@ -142,7 +135,7 @@ const CartView = () => {
           }}
           disabled={cart.items.length < 1 ? true : false}
         >
-          Checkout
+          Finalizar Compra
         </button>
       </div>
     </div>

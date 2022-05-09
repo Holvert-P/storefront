@@ -1,22 +1,3 @@
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 88px;
-  position: absolute;
-  width: 100%;
-  z-index: 10;
-}
-
-.container h1 {
-  margin: 0;
-}
-
-.logo {
-  font-size: var(--fz-xl);
-  color: var(--logo-color-900);
-}
-
 .btn {
   border: none;
   background: transparent;
@@ -35,8 +16,26 @@
   font-size: var(--fz-ml);
 }
 
-@media (max-width: 876px) {
-  .container {
-    padding: 20px 22px;
+.nav_bar {
+  z-index: 1000;
+  width: 100%;
+  background-color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.collapse {
+  position: fixed;
+  top: 2.5rem;
+  left: 0;
+  background-color: #fff;
+  padding: 2rem;
+  height: 100%;
+}
+
+@media (min-width: 992px) {
+  .collapse {
+    position: initial;
+    padding: 0;
   }
 }

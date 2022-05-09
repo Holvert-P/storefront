@@ -34,7 +34,7 @@ export function getVariantPrice(cart, variant) {
 
 export function formatPrices(cart, variant, digits = 2) {
   if (!cart || !cart.region || !variant) return;
-  if (!variant.prices) return `15.00 EUR`;
+  if (!variant.prices) return `C$`;
   return formatMoneyAmount(
     {
       currencyCode: cart.region.currency_code,
